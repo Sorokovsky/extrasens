@@ -11,21 +11,39 @@ if(!$_SESSION['answers']){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lani="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edie">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Екстрасенс розширена версія</title>
 </head>
 <body>
     <p>Оберіть діапазон вибору</p>
+    <?php echo $_SESSION['rand']; ?>
     <form action="index.php">
         <select name="di" id="">
-            <?php for($i = 1; $i < 100; $i += 10){ ?>
-            <option value="<?= $i ?>"><?= $i ?>-<?= $i + 9 ?></option>;
+            <?php for($i = 1; $i < 100; $i += 10){ 
+            ?>
+            <option <?php?> value="<?= $i ?>"><?= $i ?>-<?= $i + 9 ?></option>;
             <?php } ?>
         </select>
+        <button type="submit">Обрати діапазон</button>
     </form>
+    <?php
+    if($_GET){
+        $di = $_GET['di'];
+        if($di <= $_SESSION['rand'] AND ($di + 9) >= $_SESSION['rand']){
+            echo 'Ви вірно вибрали діапазон';
+        }elseif ($_SESSION['try'] >= 3) {
+            echo "Ви програли";
+            echo '<pre>';
+            echo ``;
+        }else{
+            $_SESSION['try']++;
+            echo 'Ви не вірно вибрали діапазон';
+        }
+    }
+    ?>
 </body>
 </html>
