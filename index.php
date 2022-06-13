@@ -9,6 +9,9 @@ if(!$_SESSION['try']){
 if(!$_SESSION['answers']){
     $_SESSION['answers'] = [];
 }
+if(!$_SESSION['di']){
+    $_SESSION['di'] = 1;
+}
 ?>
 <!DOCTYPE html>
 <html lani="en">
