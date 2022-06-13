@@ -35,6 +35,7 @@ if(!$_SESSION['answers']){
         $di = $_GET['di'];
         if($di <= $_SESSION['rand'] AND ($di + 9) >= $_SESSION['rand']){
             echo 'Ви вірно вибрали діапазон';
+            $_SESSION['di'] = $di;
             echo '<a href="./number.php">Choose number</a>';
         }elseif ($_SESSION['try'] >= 3) {
             echo "Ви програли";
