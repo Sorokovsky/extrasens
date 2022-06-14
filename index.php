@@ -9,6 +9,14 @@ if(!$_SESSION['try']){
 if(!$_SESSION['answers']){
     $_SESSION['answers'] = [91];
 }
+if($_GET){
+    if($di <= $_SESSION['rand'] AND ($di + 9) >= $_SESSION['rand']){
+    
+    
+    }else{
+        $_SESSION['try'] = $_SESSION['try'] + 1;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lani="en">
@@ -42,7 +50,6 @@ if(!$_SESSION['answers']){
             echo '<pre>';
             echo '<a href="./again.php">Play again</a>';
         }else{
-            $_SESSION['try']++;
             echo 'Ви не вірно вибрали діапазон';
         }
     }
