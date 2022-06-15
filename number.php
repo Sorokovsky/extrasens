@@ -47,9 +47,9 @@ if($_GET['number']){
         else if($_SESSION['rand'] !== $_GET['number'] AND $_SESSION['try'] < 3){
             echo 'Ви обрали не вірне число.';
             echo '<pre>';
-            if($_GET['number'] < $_SESSION['rand']){
+            if($_GET['number'] > $_SESSION['rand']){
                 echo 'Зашадане число менше'. $_GET['number']. '.';
-            }else if($_GET['number'] > $_SESSION['rand']){
+            }else if($_GET['number'] < $_SESSION['rand']){
                 echo 'Зашадане число більше'. $_GET['number']. '.';
             }
             $_SESSION['try'] = $_SESSION['try'] + 1;
