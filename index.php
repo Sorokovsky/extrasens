@@ -24,10 +24,13 @@ if(!$_SESSION['rand']){
         <?php if($_SESSION['try'] < 3){?>
             <select name="di" id="">
             <?php
-                for($i = 1; $i <= 100; $i = $i + 10){?>
-                    <option <?php if($_GET AND $_SESSION['try'] >= 0 AND $_SESSION['rand'] >= $i AND $_SESSION['rand'] <= $i + 9){
-                        echo  'selected';
-                    } ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
+                for($i = 1; $i <= 100; $i = $i + 10){
+                if($_GET AND $_SESSION['try'] >= 0 AND $_SESSION['rand'] >= $i AND $_SESSION['rand'] <= $i + 9){ ?>
+                        <option <?php ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
+                    <?php }else if(!$_GET){ ?>
+                    <option <?php ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
+                    <?php } ?>
+                    
             <?php } ?>
         </select>
         <button type="submit">Обрати</button>
@@ -42,6 +45,7 @@ if(!$_SESSION['rand']){
         }else if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
             echo 'Ви вірно обрали діапазон';
             $_SESSION['di'] = $_GET['di'];
+            $_SESSION['dimax'] = $_SESSION['di'] + 9;
             echo '<pre>';
             echo '<a href="./number.php">Оберіть число</a>';
         }else{
