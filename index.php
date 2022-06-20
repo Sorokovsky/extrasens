@@ -1,13 +1,15 @@
 <?php 
 session_start();
 if(!$_SESSION['try']){
-    $_SESSION['try'] = 0;
-}
-if(!$_SESSION['answers']){
-    $_SESSION['answers'] = [];
+    $_SESSION['try'] = 3;
 }
 if(!$_SESSION['rand']){
     $_SESSION['rand'] = rand(1, 100);
+}
+if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
+    $_SESSION['di'] = $_GET['di'];
+    $_SESSION['dimax'] = $_SESSION['di'] + 9;
+    header('Location: /number.php');
 }
  ?>
 <!DOCTYPE html>
@@ -21,7 +23,8 @@ if(!$_SESSION['rand']){
 <body>
     <form action="./index.php">
         <p>Виберіть правильний діапазон</p>
-        <?php if($_SESSION['try'] < 3){?>
+        <p>У вас <?=$_SESSION['try']; ?> спроб.</p>
+        <?php if($_SESSION['try'] > 0){?>
             <select name="di" id="">
             <?php
                 for($i = 1; $i <= 100; $i = $i + 10){
@@ -37,8 +40,13 @@ if(!$_SESSION['rand']){
         <?php } ?>
     </form>
     <?php
-    if($_GET){
-        if($_SESSION['try'] >= 3){
+    if($_SESSION['try'] <= 0){
+        echo 'Ви програли';
+        echo '<pre>';
+        echo '<a href="./again.php">Грати знову</a>';
+    }
+    if($_GET['di']){
+        if($_SESSION['try'] <= 0){
             echo 'Ви програли';
             echo '<pre>';
             echo '<a href="./again.php">Грати знову</a>';
@@ -47,10 +55,9 @@ if(!$_SESSION['rand']){
             $_SESSION['di'] = $_GET['di'];
             $_SESSION['dimax'] = $_SESSION['di'] + 9;
             echo '<pre>';
-            echo '<a href="./number.php">Оберіть число</a>';
         }else{
             echo 'Ви не вірно обрали діапазон';
-            $_SESSION['try'] = $_SESSION['try'] + 1;
+            $_SESSION['try'] = $_SESSION['try'] - 1;
         }
     }
     ?>
