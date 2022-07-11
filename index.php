@@ -6,10 +6,15 @@ if(!$_SESSION['try']){
 if(!$_SESSION['rand']){
     $_SESSION['rand'] = rand(1, 100);
 }
-if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
-    $_SESSION['di'] = $_GET['di'];
-    $_SESSION['dimax'] = $_SESSION['di'] + 9;
-    header('Location: /number.php');
+if ($_GET) {
+    if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
+        $_SESSION['di'] = $_GET['di'];
+        $_SESSION['dimax'] = $_SESSION['di'] + 9;
+        header('Location: /number.php');
+        exit();
+    }else{
+        $_SESSION['try'] = $_SESSION['try'] - 1;
+    }
 }
  ?>
 <!DOCTYPE html>
@@ -40,11 +45,6 @@ if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
         <?php } ?>
     </form>
     <?php
-    if($_SESSION['try'] <= 0){
-        echo 'Ви програли';
-        echo '<pre>';
-        echo '<a href="./again.php">Грати знову</a>';
-    }
     if($_GET['di']){
         if($_SESSION['try'] <= 0){
             echo 'Ви програли';
@@ -54,10 +54,8 @@ if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
             echo 'Ви вірно обрали діапазон';
             $_SESSION['di'] = $_GET['di'];
             $_SESSION['dimax'] = $_SESSION['di'] + 9;
-            echo '<pre>';
         }else{
             echo 'Ви не вірно обрали діапазон';
-            $_SESSION['try'] = $_SESSION['try'] - 1;
         }
     }
     ?>
