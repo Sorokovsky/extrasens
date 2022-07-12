@@ -12,6 +12,14 @@ if($_GET['number']){
         $_SESSION['try'] = $_SESSION['try'] - 1;
     }
 }
+if($_GET['number']){
+    if($_SESSION['rand'] >= $_SESSION['di'] + 5){
+        $_SESSION['di'] = $_SESSION['di'] + 5;
+        }else if($_SESSION['rand'] < $_SESSION['di'] + 5){
+            $_SESSION['dimax'] = $_SESSION['di'] + 4;
+            echo $_SESSION['dimax'];
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,14 +57,7 @@ if($_GET['number']){
                 echo '<a href="./again.php">Грати ще раз</a>'; 
             }else if($_SESSION['rand'] !== $_GET['number']){
                 
-                if($_GET['number']){
-                    if($_SESSION['rand'] >= $_SESSION['di'] + 5){
-                        $_SESSION['di'] = $_SESSION['di'] + 5;
-                        }
-                        else{
-                            $_SESSION['dimax'] = $_SESSION['di'] + 4;
-                        }
-                    }
+                
                 echo '<p>Ви не вгадали</p>';
                 if(count($_SESSION['answers']) > 1 AND $_SESSION['try'] > 0){
                     if (($_SESSION['rand'] > $_GET['number'])) {
@@ -66,7 +67,7 @@ if($_GET['number']){
                     }
                 }
             }
-        } exit() ?>
+        }?>
     </form>    
     </body>
 </html>

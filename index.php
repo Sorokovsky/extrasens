@@ -14,14 +14,13 @@ if ($_GET['di']) {
     
     }
     for($i = 1; $i <= 100; $i = $i + 10){
-        if($_SESSION['rand'] >= $i AND $_SESSION['rand'] <= $i + 9){ 
-            $_SESSION['di'] = $_GET['di'];
-            $_SESSION['dimax'] = $_SESSION['di'] + 9;
-    }
+        if($_SESSION['rand'] >= $i AND $_SESSION['rand'] <= $i + 9){
+            $_SESSION['di'] = $i;
+            $_SESSION['dimax'] = $i + 9;
+        }            
+   } 
         header('Location: number.php');
-        exit();
     }
-
  ?>
 <!DOCTYPE html>
 <html lang="uk">
@@ -44,10 +43,14 @@ if ($_GET['di']) {
                         <option <?php ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
                     <?php }else if(!$_GET){ ?>
                     <option <?php ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
-                    <?php } } ?>
+                    <?php } ?>
+                    
+            <?php } ?>
         </select>
         <button type="submit">Обрати</button>
         <?php } ?>
     </form>
+    <?php
+    ?>
 </body>
 </html>
