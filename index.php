@@ -6,16 +6,22 @@ if(!$_SESSION['try']){
 if(!$_SESSION['rand']){
     $_SESSION['rand'] = rand(1, 100);
 }
-if ($_GET) {
+if ($_GET['di']) {
     if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
         $_SESSION['di'] = $_GET['di'];
-        $_SESSION['dimax'] = $_SESSION['di'] + 9;
-        header('Location: /number.php');
-        exit();
     }else{
         $_SESSION['try'] = $_SESSION['try'] - 1;
+    
     }
-}
+    for($i = 1; $i <= 100; $i = $i + 10){
+        if($_SESSION['rand'] >= $i AND $_SESSION['rand'] <= $i + 9){ 
+            $_SESSION['di'] = $_GET['di'];
+            $_SESSION['dimax'] = $_SESSION['di'] + 9;
+    }
+        header('Location: number.php');
+        exit();
+    }
+
  ?>
 <!DOCTYPE html>
 <html lang="uk">
@@ -29,7 +35,8 @@ if ($_GET) {
     <form action="./index.php">
         <p>Виберіть правильний діапазон</p>
         <p>У вас <?=$_SESSION['try']; ?> спроб.</p>
-        <?php if($_SESSION['try'] > 0){?>
+        <?php if($_SESSION['try'] > 0){
+            echo $_SESSION['rand'];?>
             <select name="di" id="">
             <?php
                 for($i = 1; $i <= 100; $i = $i + 10){
@@ -37,27 +44,10 @@ if ($_GET) {
                         <option <?php ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
                     <?php }else if(!$_GET){ ?>
                     <option <?php ?> value="<?= $i ?>"><?= $i?>-<?= $i + 9 ?></option>
-                    <?php } ?>
-                    
-            <?php } ?>
+                    <?php } } ?>
         </select>
         <button type="submit">Обрати</button>
         <?php } ?>
     </form>
-    <?php
-    if($_GET['di']){
-        if($_SESSION['try'] <= 0){
-            echo 'Ви програли';
-            echo '<pre>';
-            echo '<a href="./again.php">Грати знову</a>';
-        }else if($_SESSION['rand'] >= $_GET['di'] AND $_SESSION['rand'] <= $_GET['di'] + 9){
-            echo 'Ви вірно обрали діапазон';
-            $_SESSION['di'] = $_GET['di'];
-            $_SESSION['dimax'] = $_SESSION['di'] + 9;
-        }else{
-            echo 'Ви не вірно обрали діапазон';
-        }
-    }
-    ?>
 </body>
 </html>

@@ -25,6 +25,7 @@ if($_GET['number']){
     <form action="./number.php", method="GET">
         <?php if($_SESSION['try'] <= 0 OR $_SESSION['rand'] == $_GET['number']){} else{ ?>
         <p><?php echo 'Увас '. $_SESSION['try']. ' спроби'; ?></p>
+        <?php echo $_SESSION['di'].'-'.$_SESSION['dimax'];?> 
         <? } ?>
         <?php if($_SESSION['try'] <= 0 OR $_SESSION['rand'] == $_GET['number']){} else{ ?>
             <p>Оберіть число</p>
@@ -65,7 +66,7 @@ if($_GET['number']){
                     }
                 }
             }
-        } ?>
+        } exit() ?>
     </form>    
-</body>
+    </body>
 </html>
